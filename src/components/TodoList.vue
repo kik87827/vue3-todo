@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import { watch } from "vue";
+
 export default {
   props: ["todoitems"],
   /* props: {
@@ -19,6 +21,10 @@ export default {
     function removeTodo(item, index) {
       context.emit("remove", item, index);
     }
+
+    watch(props.todoitems, (newValue) => {
+      console.log(newValue);
+    });
     return { removeTodo };
   },
 };

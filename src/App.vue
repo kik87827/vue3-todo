@@ -8,7 +8,7 @@
 import TodoHeader from "@/components/TodoHeader.vue";
 import TodoInput from "./components/TodoInput.vue";
 import TodoList from "./components/TodoList.vue";
-import { ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 export default {
   name: "App",
   components: {
@@ -18,8 +18,8 @@ export default {
   },
   data() {
     return {
-      title : '할일 앱'
-    }
+      title: "할일 앱",
+    };
   },
   setup() {
     // data
@@ -35,7 +35,21 @@ export default {
       }
       return result;
     }
-    todoitems.value = fetchTodos();
+
+    //console.log('1 : setup called');
+
+    // 라이프 사이클 API
+    onBeforeMount(() => {
+      //console.log('2 : onBeforeMount called');
+      // 라이프 사이클 API 적용된 구간
+      todoitems.value = fetchTodos();
+    });
+    /* onMounted(() => {
+      console.log('3 :');
+    });
+    onUnmounted(() => {
+      console.log('4 :');
+    }); */
 
     function addTodoItem(todo) {
       todoitems.value.push(todo);
